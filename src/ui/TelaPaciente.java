@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -28,14 +27,22 @@ import com.github.lgooddatepicker.components.*;
 import dao.Fabrica;
 import interfaces.InterfaceConvenio;
 import interfaces.InterfacePaciente;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 
@@ -79,7 +86,6 @@ public class TelaPaciente extends JDialog implements KeyListener {
             txtId.setText(String.valueOf(paciente.getId()));
             txtNome.setText(paciente.getNome());
             txtNome.setEnabled(true);
-            txtNome.requestFocus();
             txtMae.setText(paciente.getMae());
             txtMae.setEnabled(true);
             txtPai.setText(paciente.getPai());
@@ -105,6 +111,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
             cmbUf.setSelectedItem(paciente.getUf());
             cmbUf.setEnabled(true);
             getIdade();
+            txtNome.requestFocus();
         } else {
             txtId.setText("");
             txtNome.setText("");
@@ -171,7 +178,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
         lblIdade = new JLabel("Idade:");
         lblIdade.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIdade.setFont(new Font("Tahoma", Font.BOLD, 12));
-        lblIdade.setBounds(308, 27, 242, 14);
+        lblIdade.setBounds(449, 27, 101, 14);
         getContentPane().add(lblIdade);
 
         JLabel lblNome = new JLabel("Nome");
@@ -372,7 +379,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
                 }
             }
         });
-        btnSalvar.setBounds(50, 437, 100, 23);
+        btnSalvar.setBounds(49, 423, 100, 23);
         getContentPane().add(btnSalvar);
 
         JButton btnExcluir = new JButton("Excluir");
@@ -400,7 +407,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
 
             }
         });
-        btnExcluir.setBounds(183, 437, 100, 23);
+        btnExcluir.setBounds(182, 423, 100, 23);
         getContentPane().add(btnExcluir);
 
         JButton btnBuscar = new JButton("Buscar");
@@ -416,7 +423,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
                 preencherCampos();
             }
         });
-        btnBuscar.setBounds(316, 437, 100, 23);
+        btnBuscar.setBounds(315, 423, 100, 23);
         getContentPane().add(btnBuscar);
 
         JButton btnFechar = new JButton("Fechar");
@@ -427,11 +434,31 @@ public class TelaPaciente extends JDialog implements KeyListener {
                 dispose();
             }
         });
-        btnFechar.setBounds(450, 437, 100, 23);
+        btnFechar.setBounds(449, 423, 100, 23);
         getContentPane().add(btnFechar);
 
+        JButton button = new JButton("Imprimir");
+        button.setIcon(new ImageIcon(TelaPaciente.class.getResource("/imagens/icons8-impress\u00E3o-16.png")));
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                if(paciente == null){
+                    JOptionPane.showMessageDialog(null, "Nao possui paciente para iimprimir", "Atenção",
+                                JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    List l = new ArrayList<Paciente>();
+                    paciente.setNomeConvenio((cmbConvenio.getSelectedIndex() < 0) ? "" : convenios.get(cmbConvenio.getSelectedIndex()).getNome()
+                    );
+                    paciente.setIdade(getIdade());
+                    l.add(paciente);
+                    imprimir_Relatorio(l);
+                }
+            }
+        });
+        button.setBounds(310, 23, 100, 23);
+        getContentPane().add(button);
+
         preencherCampos();
-        setModal(true);
+        //setModal(true);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         repaint();
@@ -467,7 +494,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
         }
     }
 
-    public int getIdade() {
+    public String getIdade() {
         GregorianCalendar nascimento = new GregorianCalendar();
         ;
         GregorianCalendar hj = new GregorianCalendar();
@@ -477,7 +504,7 @@ public class TelaPaciente extends JDialog implements KeyListener {
             nascimento.setTime(df1.parse(txtDataNasc.getText()));
         } catch (ParseException e) {
             lblIdade.setText("Idade: ano(s)");
-            return 0;
+            return "";
         }
 
         Calendar c = Calendar.getInstance();
@@ -504,7 +531,22 @@ public class TelaPaciente extends JDialog implements KeyListener {
         }
 
         lblIdade.setText("Idade:" + ret);
-        return anos;
+        return ret;
     }
 
+    public void imprimir_Relatorio(List lista) {
+        try {
+            String caminhoRel = "/uteis/imp_paciente.jasper";
+            InputStream relJasper = getClass().getResourceAsStream(caminhoRel);
+            JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(lista);
+            Map parametros = new HashMap();
+            JasperPrint print = JasperFillManager.fillReport(relJasper, parametros, ds);
+            JasperViewer visualizar = new JasperViewer(print, true);
+            visualizar.setTitle("Relatorios de Paciente");
+            visualizar.setExtendedState(visualizar.MAXIMIZED_BOTH);
+            visualizar.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

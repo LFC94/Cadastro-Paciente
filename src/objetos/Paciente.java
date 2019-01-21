@@ -5,137 +5,153 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Paciente {
-	private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-	private String nome, mae, pai, profissao, cep, endereco, bairro, cidade, uf = "MG", telefone, numero;
-	private Date dataNasc;
-	private int id, convenio = -1;
 
-	public String getNome() {
-		return nome;
-	}
+    private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    private String nome, mae, pai, profissao, cep, endereco, bairro, cidade, uf = "MG", telefone, numero, nomeConvenio, Idade;
+    private Date dataNasc;
+    private int id, convenio = -1;
 
-	public void setNome(String nome) {
-		this.nome = nome.toUpperCase().trim();
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getMae() {
-		return mae;
-	}
+    public void setNome(String nome) {
+        this.nome = nome.toUpperCase().trim();
+    }
 
-	public void setMae(String mae) {
-		this.mae = mae.toUpperCase().trim();
-	}
+    public String getMae() {
+        return mae;
+    }
 
-	public String getPai() {
-		return pai;
-	}
+    public void setMae(String mae) {
+        this.mae = mae.toUpperCase().trim();
+    }
 
-	public void setPai(String pai) {
-		this.pai = pai.toUpperCase().trim();
-	}
+    public String getPai() {
+        return pai;
+    }
 
-	public String getProfissao() {
-		return profissao;
-	}
+    public void setPai(String pai) {
+        this.pai = pai.toUpperCase().trim();
+    }
 
-	public void setProfissao(String profissao) {
-		this.profissao = profissao.toUpperCase().trim();
-	}
+    public String getProfissao() {
+        return profissao;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public void setProfissao(String profissao) {
+        this.profissao = profissao.toUpperCase().trim();
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public String getEndereco() {
-		return endereco;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco.toUpperCase().trim();
-	}
+    public String getEndereco() {
+        return endereco;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public void setEndereco(String endereco) {
+        this.endereco = endereco.toUpperCase().trim();
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro.toUpperCase().trim();
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro.toUpperCase().trim();
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade.toUpperCase().trim();
-	}
+    public String getCidade() {
+        return cidade;
+    }
 
-	public String getUf() {
-		return uf;
-	}
+    public void setCidade(String cidade) {
+        this.cidade = cidade.toUpperCase().trim();
+    }
 
-	public void setUf(String uf) {
-		this.uf = uf.toUpperCase().trim();
-	}
+    public String getUf() {
+        return uf;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public void setUf(String uf) {
+        this.uf = uf.toUpperCase().trim();
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public Date getDataNasc() {
-		return dataNasc;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public String getDataNascimento() {
-		return dataNasc == null ? "" : df.format(dataNasc);
-	}
+    public Date getDataNasc() {
+        return dataNasc;
+    }
 
-	public void setDataNasc(Date dataNasc) throws Exception {
-		if (dataNasc.getTime() > (new Date()).getTime()) {
-			throw new Exception("Data de nacimento maior que a data atual");
-		}
-		this.dataNasc = dataNasc;
-	}
+    public String getDataNascimento() {
+        return dataNasc == null ? "" : df.format(dataNasc);
+    }
 
-	public void setDataNasc(String dataNasc) throws Exception {
-		try {
-			setDataNasc(df.parse(dataNasc));
-		} catch (ParseException e) {
-			this.dataNasc = null;
-		}
+    public void setDataNasc(Date dataNasc) throws Exception {
+        if (dataNasc.getTime() > (new Date()).getTime()) {
+            throw new Exception("Data de nacimento maior que a data atual");
+        }
+        this.dataNasc = dataNasc;
+    }
 
-	}
+    public void setDataNasc(String dataNasc) throws Exception {
+        try {
+            setDataNasc(df.parse(dataNasc));
+        } catch (ParseException e) {
+            this.dataNasc = null;
+        }
 
-	public int getId() {
-		return id;
-	}
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getConvenio() {
-		return convenio;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setConvenio(int convenio) {
-		this.convenio = convenio;
-	}
+    public int getConvenio() {
+        return convenio;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public void setConvenio(int convenio) {
+        this.convenio = convenio;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getNomeConvenio() {
+        return nomeConvenio;
+    }
+
+    public void setNomeConvenio(String nomeConvenio) {
+        this.nomeConvenio = nomeConvenio;
+    }
+
+    public String getIdade() {
+        return Idade;
+    }
+
+    public void setIdade(String idade) {
+        Idade = idade;
+    }
 }
