@@ -12,14 +12,14 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="Blibliotecas/LGoodDatePicker-10.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/commons-beanutils-1.7.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/commons-digester-1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/groovy-all-1.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/itext-2.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/jasperreports-5.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/poi-3.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lucas/Documents/Codigo_Fonte/Cursos/Fora dos Curos/Java/Leticia/Blibliotecas/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/groovy-all-1.5.3.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/jasperreports-5.5.1.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="Blibliotecas/servlet-api-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
